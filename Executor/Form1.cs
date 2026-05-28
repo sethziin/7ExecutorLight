@@ -78,6 +78,20 @@ namespace Executor
             _settings = new SettingsManager(appData);
         }
 
+        private async Task StartLoadingTimeout()
+        {
+            try
+            {
+                await Task.Delay(15000);
+                if (_loadingOverlay != null && _loadingOverlay.Visible)
+                {
+                    System.Diagnostics.Debug.WriteLine("[Loading] Timeout – forcing hide");
+                    HideLoadingOverlay();
+                }
+            }
+            catch { }
+        }
+
         private async void Form1_Load(object sender, EventArgs e)
         {
             try
@@ -97,6 +111,8 @@ namespace Executor
 
                 webView21.Source = new Uri("https://app/index.html");
                 UpdateProgress(70);
+
+                _ = StartLoadingTimeout();
             }
             catch (Exception ex)
             {
@@ -362,15 +378,17 @@ namespace Executor
 
         private void WebMessageReceived(object sender, CoreWebView2WebMessageReceivedEventArgs e)
         {
-            string json = e.WebMessageAsJson;
-            string type = ParseString(json, "type");
-            System.Diagnostics.Debug.WriteLine($"[IPC] Received: {type}");
-
-            switch (type)
+            try
             {
-                case "loadingTheme":
-                    ApplyThemeToLoadingOverlay(ParseString(json, "value") ?? "dark");
-                    break;
+                string json = e.WebMessageAsJson;
+                string type = ParseString(json, "type");
+                System.Diagnostics.Debug.WriteLine($"[IPC] Received: {type}");
+
+                switch (type)
+                {
+                    case "loadingTheme":
+                        ApplyThemeToLoadingOverlay(ParseString(json, "value") ?? "dark");
+                        break;
 
                 case "settingsGetAll":
                     Post(new { type = "settingsData", settings = _settings.GetAll() });
@@ -525,6 +543,11 @@ namespace Executor
                     if (!string.IsNullOrEmpty(revealPath))
                         _fileSystem.OpenInExplorer(revealPath);
                     break;
+            }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"[IPC] Error: {ex.Message}");
             }
         }
 
