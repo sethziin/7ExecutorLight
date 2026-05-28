@@ -1,0 +1,111 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root, [data-theme="light"] {
+    --app-bg: #f0ece6;
+    --app-surface: #faf8f5;
+    --app-panel: #e8e4de;
+    --app-card: #ffffff;
+    --app-border: #d6d2ca;
+    --app-hover: #e2ded6;
+    --app-accent: #e35a30;
+    --app-accent-dim: #c94a28;
+    --app-accent-glow: rgba(227,90,48,0.10);
+    --app-text: #1a1816;
+    --zinc-100: #1e1c1a;
+    --zinc-200: #302c28;
+    --zinc-300: #423e3a;
+    --zinc-400: #605c58;
+    --zinc-500: #7e7a76;
+    --zinc-600: #9c9894;
+    --zinc-700: #b8b4b0;
+    --zinc-800: #d8d4d0;
+    --zinc-900: #eeeaE6;
+  }
+
+  [data-theme="dark"] {
+    --app-bg: #0b0b0d;
+    --app-surface: #111115;
+    --app-panel: #14141a;
+    --app-card: #18181f;
+    --app-border: #1e1e28;
+    --app-hover: #22222e;
+    --app-accent: #f43f5e;
+    --app-accent-dim: #be123c;
+    --app-accent-glow: rgba(244,63,94,0.15);
+    --app-text: #e4e4f0;
+    --zinc-100: #f4f4f5;
+    --zinc-200: #e4e4e7;
+    --zinc-300: #d4d4d8;
+    --zinc-400: #a1a1aa;
+    --zinc-500: #71717a;
+    --zinc-600: #52525b;
+    --zinc-700: #3f3f46;
+    --zinc-800: #27272a;
+    --zinc-900: #18181b;
+  }
+
+  [data-theme="darker"] {
+    --app-bg: #050508;
+    --app-surface: #08080b;
+    --app-panel: #0a0a0f;
+    --app-card: #0d0d13;
+    --app-border: #14141e;
+    --app-hover: #181824;
+    --app-accent: #f43f5e;
+    --app-accent-dim: #be123c;
+    --app-accent-glow: rgba(244,63,94,0.15);
+    --app-text: #d4d4e0;
+    --zinc-100: #e4e4f0;
+    --zinc-200: #d4d4e0;
+    --zinc-300: #b4b4c0;
+    --zinc-400: #9494a0;
+    --zinc-500: #747480;
+    --zinc-600: #545460;
+    --zinc-700: #343440;
+    --zinc-800: #1e1e28;
+    --zinc-900: #12121a;
+  }
+
+  [data-theme="pink"] {
+    --app-bg: #f2e0ea;
+    --app-surface: #f8ecf4;
+    --app-panel: #ead4e0;
+    --app-card: #fff5f8;
+    --app-border: #dcc0d0;
+    --app-hover: #f0dce8;
+    --app-accent: #d43a62;
+    --app-accent-dim: #b82e50;
+    --app-accent-glow: rgba(212,58,98,0.12);
+    --app-text: #140a10;
+    --zinc-100: #181820;
+    --zinc-200: #2a2a34;
+    --zinc-300: #3c3c48;
+    --zinc-400: #5c5c68;
+    --zinc-500: #7c7c88;
+    --zinc-600: #9c9ca8;
+    --zinc-700: #bcbcc8;
+    --zinc-800: #dcdce4;
+    --zinc-900: #eeeef4;
+  }
+
+  body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    background: var(--app-bg);
+    color: var(--app-text);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+  .scroll-thin::-webkit-scrollbar { width: 4px; height: 4px; }
+  .scroll-thin::-webkit-scrollbar-track { background: transparent; }
+  .scroll-thin::-webkit-scrollbar-thumb { background: #c8c4be; border-radius: 2px; }
+  .scroll-thin::-webkit-scrollbar-thumb:hover { background: #a8a49e; }
+}
